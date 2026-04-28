@@ -157,9 +157,9 @@ function initBoard() {
     }
 
     const tileSize = 60;
-    const gap = 5;
-    const startX = (400 - (4 * tileSize + 3 * gap)) / 2; // center 4 cols in 400px
-    const startY = 15; // padding top
+    const gap = 20;
+    const startX = (400 - (4 * tileSize + 3 * gap)) / 2;
+    const startY = (400 - (5 * tileSize + 4 * gap)) / 2;
 
     for (let row = 0; row < 5; row++) {
         for (let col = 0; col < 4; col++) {
@@ -341,10 +341,10 @@ function callLightning() {
         allTiles.forEach(t => t.classList.remove('revealed'));
     }, 400);
 
-    // Re-enable lightning button after 3s total
+    // Re-enable lightning button after 5s total
     setTimeout(() => {
         isFlashActive = false;
-    }, 3000);
+    }, 5000);
 }
 
 function revealWord() {

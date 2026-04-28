@@ -81,10 +81,10 @@ body {
 }
 
 .tile {
-  background: linear-gradient(135deg, #7f8c8d, #34495e);
-  border: 2px solid #2c3e50;
+  background: radial-gradient(circle at center, #7f8c8d, #34495e, #2c3e50);
+  border: 2px solid #1a252f;
   border-radius: 5px;
-  box-shadow: inset 0 0 10px rgba(0,0,0,0.5), 2px 2px 5px rgba(0,0,0,0.8);
+  box-shadow: inset 0 0 15px rgba(0,0,0,0.8), 3px 3px 6px rgba(0,0,0,0.6);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -96,7 +96,7 @@ body {
   position: absolute; 
   width: 60px;
   height: 60px;
-  transition: transform 0.1s, color 3s ease-out, background 3s ease-out, text-shadow 3s ease-out;
+  transition: transform 0.1s, color 5s ease-out, background 5s ease-out, text-shadow 5s ease-out;
   z-index: 10;
 }
 
@@ -161,17 +161,17 @@ body {
 
 .greek-btn {
   flex: 1;
-  padding: 15px;
+  padding: 10px;
   font-family: 'Cinzel', serif;
   font-size: 20px;
   font-weight: bold;
-  color: #fff;
-  background: linear-gradient(to bottom, #b8860b, #8b6508);
-  border: 2px solid #ffd700;
+  color: #ecf0f1;
+  background: linear-gradient(to bottom, #7f8c8d, #2c3e50);
+  border: 2px solid #1a252f;
   border-radius: 5px;
   cursor: pointer;
   text-shadow: 1px 1px 2px #000;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.5);
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.5), 0 4px 6px rgba(0,0,0,0.6);
   transition: all 0.2s;
 }
 
@@ -187,8 +187,6 @@ body {
 }
 
 #btn-lightning {
-  background: linear-gradient(to bottom, #3498db, #2980b9);
-  border-color: #5dade2;
   font-size: 24px;
 }
 
