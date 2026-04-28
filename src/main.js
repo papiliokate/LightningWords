@@ -497,6 +497,16 @@ document.getElementById('btn-close-ios-modal')?.addEventListener('click', () => 
     document.getElementById('ios-install-modal').classList.remove('active');
 });
 
+document.getElementById('tutorial-btn')?.addEventListener('click', () => {
+    if (analytics) logEvent(analytics, 'tutorial_opened');
+    document.getElementById('tutorial-modal').classList.remove('hidden');
+    document.getElementById('tutorial-modal').classList.add('active');
+});
+
+document.getElementById('btn-close-tutorial')?.addEventListener('click', () => {
+    document.getElementById('tutorial-modal').classList.remove('active');
+});
+
 document.getElementById('btn-binge')?.addEventListener('click', () => {
     if (analytics) logEvent(analytics, 'binge_presale_click');
     window.location.href = 'https://oops-games-hub.web.app/presale.html';

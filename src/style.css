@@ -63,6 +63,26 @@ body {
   background: rgba(0, 0, 0, 0.5);
 }
 
+.tutorial-btn {
+  background: linear-gradient(to bottom, #7f8c8d, #2c3e50);
+  border: 2px solid #1a252f;
+  color: #fff;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  font-family: sans-serif;
+  margin: 0 10px;
+}
+.tutorial-btn:active {
+  transform: scale(0.95);
+}
+
 @keyframes scoreFlash {
   0% { transform: scale(1); color: #ffd700; text-shadow: 0 0 5px #b8860b; }
   50% { transform: scale(1.5); color: #fff; text-shadow: 0 0 20px #fff, 0 0 30px #f1c40f; }

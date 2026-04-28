@@ -15,6 +15,7 @@
 
       <div id="header">
         <div id="score">Score: 0</div>
+        <div id="tutorial-btn" class="tutorial-btn">❓</div>
         <div id="lightning-count">Bolts: 5</div>
       </div>
       
@@ -56,6 +57,20 @@
           <button class="modal-btn btn-binge" id="carousel-binge" style="background: #e91e63; color: white;">🎟️ Binge this game ($0.99)</button>
         </div>
         <p id="win-cypher" style="font-size: 1.5rem; font-family: monospace; letter-spacing: 4px; color: #333; margin: 15px auto; font-weight: bold; background: #eee; padding: 10px; border-radius: 10px; border: 2px dashed #ccc; width: fit-content;"></p>
+      </div>
+    </div>
+
+    <div id="tutorial-modal" class="modal hidden">
+      <div class="modal-content">
+        <h2 style="color: #2c3e50;">How to Play</h2>
+        <p style="font-size: 1.2rem; line-height: 1.5; color: #333; text-align: left;">
+          <strong>1. Call Lightning:</strong> The board is dark! Click "Call Lightning" to briefly reveal the letters. Pay close attention before they fade back to stone!<br><br>
+          <strong>2. Spell Words:</strong> Drag letters from the board down into the tray slots to spell a word.<br><br>
+          <strong>3. Reveal:</strong> Click "Reveal" to check your word. If it's valid, you score points! Clear the board to win a bonus!
+        </p>
+        <div class="modal-btns">
+            <button id="btn-close-tutorial" class="modal-btn btn-play-again" style="background: #2c3e50;">Got it!</button>
+        </div>
       </div>
     </div>
 
