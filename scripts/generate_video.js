@@ -51,25 +51,25 @@ async function main() {
     
     const ttsPools = {
         standard: [
-            "Can you smack that donkey in the right order? Check out the link in our bio to play all our games for free!",
-            "Here is today's Smack That puzzle. Pay attention, and head to our profile to play for free!",
-            "Let's see if you can solve this sequence. Give it a try at the link in our bio!",
-            "A new day, a new sequence to smack. Check out the link in our bio to play yourself!",
-            "Do you have what it takes to beat today's challenge? Play free from our profile!"
+            "Can you call the lightning and remember the hidden words? Check out the link in our bio to play all our games for free!",
+            "Here is today's Lightning Words puzzle. Pay close attention, and head to our profile to play for free!",
+            "Let's see if you can spell a long word from memory. Give it a try at the link in our bio!",
+            "A new day, a new set of lightning words. Check out the link in our bio to play yourself!",
+            "Do you have the memory to beat today's challenge? Play free from our profile!"
         ],
         fail: [
-            "This sequence is genuinely so difficult. Even the bot is struggling! Think you can do better? Try it at the link in our bio!",
-            "I can't believe the AI smacked the wrong donkey! Can you solve it? Link in bio to play.",
-            "Wow, this one is tough. Even the computer couldn't get it. Prove you're better via our profile link!",
+            "This board is genuinely so difficult. Even the bot is struggling! Think you can do better? Try it at the link in our bio!",
+            "I can't believe the AI misspelled the word! Can you solve it? Link in bio to play.",
+            "Wow, this one is tough. Even the computer couldn't get a long word. Prove you're better via our profile link!",
             "Absolute disaster of a run! Think you can do better? Try the challenge for free at the link in our bio.",
-            "It smacked the wrong letter entirely! Can you beat this level? Play for free via the link in our profile."
+            "It dragged the wrong letter entirely! Can you beat this level? Play for free via the link in our profile."
         ],
         interactive: [
-            "Only 1% of players memorize the board well enough to find this final sequence. What spells the answer? Play for free via the link in our profile!",
-            "Which donkey is the winning match? Let us know in the comments and play at the link in our bio!",
-            "Can you spot the final donkey to smack? Test your memory for free via the link in our profile.",
-            "You only have one chance to get this right. Which one wins it? Link in bio to play!",
-            "Are you smart enough to find the final letter? Play the full game for free using the link in our bio."
+            "Only 1% of players memorize the board well enough to find a six letter word. What spells the answer? Play for free via the link in our profile!",
+            "Which letters form the winning word? Let us know in the comments and play at the link in our bio!",
+            "Can you spot the longest word to spell? Test your memory for free via the link in our profile.",
+            "You only have one chance to see the letters. What word wins it? Link in bio to play!",
+            "Are you smart enough to find the hidden word? Play the full game for free using the link in our bio."
         ]
     };
 

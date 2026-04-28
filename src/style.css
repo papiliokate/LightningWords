@@ -13,7 +13,7 @@ body {
   background-image: radial-gradient(circle at center, #2a2a2a, #000);
   font-family: 'Cinzel', serif;
   color: #fff;
-  height: 100dvh;
+  height: 100vh;
   overflow: hidden;
   position: relative;
 }
