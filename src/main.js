@@ -155,13 +155,11 @@ function initBoard() {
         trayContainer.appendChild(slot);
     }
 
-    const startX = 15; // padding left
+    const startX = (400 - (4 * tileSize + 3 * gap)) / 2; // center 4 cols in 400px
     const startY = 15; // padding top
-    const tileSize = 60;
-    const gap = 5;
 
-    for (let row = 0; row < 6; row++) {
-        for (let col = 0; col < 6; col++) {
+    for (let row = 0; row < 5; row++) {
+        for (let col = 0; col < 4; col++) {
             const letter = getRandomLetter();
             const tile = document.createElement('div');
             tile.className = 'tile';
@@ -336,13 +334,14 @@ function callLightning() {
     
     setTimeout(() => {
         flashOverlay.classList.remove('flash-active');
+        // Start fading out letters immediately after flash
+        allTiles.forEach(t => t.classList.remove('revealed'));
     }, 400);
 
-    // Hide letters after 1.5s
+    // Re-enable lightning button after 3s total
     setTimeout(() => {
-        allTiles.forEach(t => t.classList.remove('revealed'));
         isFlashActive = false;
-    }, 1500);
+    }, 3000);
 }
 
 function revealWord() {
