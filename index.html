@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Lightning Words</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div id="game-container">
+      <div id="header">
+        <div id="score">Score: 0</div>
+        <div id="lightning-count">Bolts: 5</div>
+      </div>
+      
+      <div id="board-container">
+        <!-- Tiles will be added here via JS -->
+      </div>
+      
+      <div id="tray-container">
+        <!-- We will visually anchor tiles to slots -->
+      </div>
+
+      <div id="controls">
+        <button id="btn-lightning" class="greek-btn">Call Lightning</button>
+        <div class="controls-row">
+          <button id="btn-reveal" class="greek-btn">Reveal</button>
+          <button id="btn-score" class="greek-btn">Score Me</button>
+        </div>
+      </div>
+    </div>
+    
+    <div id="flash-overlay"></div>
+
+    <div id="win-modal" class="modal hidden">
+      <div class="modal-content">
+        <h2 id="win-title">Victory!</h2>
+        <p id="win-score">Final Score: 0</p>
+        <div class="modal-btns" id="regular-win-btns">
+          <button class="modal-btn btn-share" id="btn-share">📤 Brag for Another Puzzle!</button>
+          <button class="modal-btn btn-install" id="btn-install">📲 Add to Device</button>
+          <button class="modal-btn btn-binge" id="btn-binge">🎟️ Binge Puzzles ($0.99)</button>
+          <button class="modal-btn btn-hub" id="btn-hub" onclick="window.location.href='https://oops-games-hub.web.app'">🎮 Play a different game</button>
+        </div>
+        <div class="modal-btns" id="carousel-btns" style="display:none;">
+          <button class="modal-btn btn-next" id="carousel-play-next" style="background: #38bdf8; color: white;">➡️ Play the next game</button>
+          <button class="modal-btn btn-share" id="carousel-share" style="display:none; background: #38bdf8; color: white;">📤 Share for another ride</button>
+          <button class="modal-btn btn-binge" id="carousel-binge" style="background: #e91e63; color: white;">🎟️ Binge this game ($0.99)</button>
+        </div>
+        <p id="win-cypher" style="font-size: 1.5rem; font-family: monospace; letter-spacing: 4px; color: #333; margin: 15px auto; font-weight: bold; background: #eee; padding: 10px; border-radius: 10px; border: 2px dashed #ccc; width: fit-content;"></p>
+      </div>
+    </div>
+
+    <div id="ios-install-modal" class="modal hidden">
+      <div class="modal-content">
+        <h2 style="color: var(--barn-color);">Free Binge Token!</h2>
+        <p style="font-size: 1.2rem; line-height: 1.5;">
+          Apple doesn't let us install apps automatically. 😢<br><br>
+          But if you tap the <strong>Share</strong> icon below, and then <strong>Add to Home Screen</strong>, we'll give you a free Binge Token when you open the app!
+        </p>
+        <div class="modal-btns">
+            <button id="btn-close-ios-modal" class="modal-btn btn-play-again">Got it!</button>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
