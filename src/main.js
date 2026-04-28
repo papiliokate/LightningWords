@@ -155,6 +155,8 @@ function initBoard() {
         trayContainer.appendChild(slot);
     }
 
+    const tileSize = 60;
+    const gap = 5;
     const startX = (400 - (4 * tileSize + 3 * gap)) / 2; // center 4 cols in 400px
     const startY = 15; // padding top
 
