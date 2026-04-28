@@ -82,6 +82,7 @@ const countDisplay = document.getElementById('lightning-count');
 const flashOverlay = document.getElementById('flash-overlay');
 
 const thunderSound = new Audio('/thunder.mp3');
+const successSound = new Audio('/success.mp3');
 
 // --- PRNG for Daily Seed ---
 function getDailySeed() {
@@ -370,6 +371,14 @@ function revealWord() {
             });
             trayTiles = [];
             
+            // Audio and Visual Feedback
+            successSound.currentTime = 0;
+            successSound.play().catch(e => console.log("Audio play blocked", e));
+            
+            scoreDisplay.classList.remove('score-flash');
+            void scoreDisplay.offsetWidth; // trigger reflow
+            scoreDisplay.classList.add('score-flash');
+
             // Board clear check
             if (boardTiles.length === 0) {
                 score += 50;

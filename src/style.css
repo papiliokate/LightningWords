@@ -63,6 +63,16 @@ body {
   background: rgba(0, 0, 0, 0.5);
 }
 
+@keyframes scoreFlash {
+  0% { transform: scale(1); color: #ffd700; text-shadow: 0 0 5px #b8860b; }
+  50% { transform: scale(1.5); color: #fff; text-shadow: 0 0 20px #fff, 0 0 30px #f1c40f; }
+  100% { transform: scale(1); color: #ffd700; text-shadow: 0 0 5px #b8860b; }
+}
+
+.score-flash {
+  animation: scoreFlash 0.5s ease-out;
+}
+
 #board-container {
   width: 400px;
   height: 400px;
