@@ -443,6 +443,32 @@ function scoreMe() {
     }
 }
 
+async function runAutoplay() {
+    await new Promise(r => setTimeout(r, 1000));
+    callLightning();
+    await new Promise(r => setTimeout(r, 1500));
+    
+    // Pick first 3 tiles
+    for (let i = 0; i < 3; i++) {
+        const t = boardTiles[i].element;
+        t.dataset.inTray = "true";
+        trayTiles.push(t);
+        updateTrayLayout();
+        await new Promise(r => setTimeout(r, 500));
+    }
+    
+    await new Promise(r => setTimeout(r, 500));
+    revealWord();
+    
+    // revealWord takes 1000ms. Force win screen soon after for video hook.
+    setTimeout(() => {
+        if (!window._VIDEO_RECORDING_DONE) {
+            score += 20;
+            scoreMe();
+        }
+    }, 2000);
+}
+
 // --- Ecosystem Event Listeners ---
 let deferredPrompt;
 window.addEventListener('beforeinstallprompt', (e) => {
@@ -541,4 +567,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     resizeGame();
     await loadDictionary();
     initBoard();
+    if (urlParams.get('autoplay')) {
+        runAutoplay();
+    }
 });
