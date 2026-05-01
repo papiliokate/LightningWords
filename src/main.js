@@ -81,8 +81,8 @@ const scoreDisplay = document.getElementById('score');
 const countDisplay = document.getElementById('lightning-count');
 const flashOverlay = document.getElementById('flash-overlay');
 
-const thunderSound = new Audio('/thunder.mp3');
-const successSound = new Audio('/success.mp3');
+const thunderSound = new Audio(import.meta.env.BASE_URL + 'thunder.mp3');
+const successSound = new Audio(import.meta.env.BASE_URL + 'success.mp3');
 
 // --- PRNG for Daily Seed ---
 function getDailySeed() {
@@ -136,7 +136,7 @@ function resizeGame() {
 
 async function loadDictionary() {
     try {
-        const res = await fetch('/dictionary.json');
+        const res = await fetch(import.meta.env.BASE_URL + 'dictionary.json');
         dictionary = await res.json();
     } catch(e) {
         console.error("Failed to load dictionary:", e);
@@ -406,12 +406,21 @@ function scoreMe() {
     
     if (analytics) logEvent(analytics, 'level_complete', { score: score });
 
+    const isEmbed = urlParams.get('mode') === 'embed';
     const isCarousel = urlParams.get('carousel') === 'true';
     const regBtns = document.getElementById('regular-win-btns');
     const carBtns = document.getElementById('carousel-btns');
+    const embedBtns = document.getElementById('embed-btns');
     
-    if (isCarousel) {
+    if (isEmbed) {
         if (regBtns) regBtns.style.display = 'none';
+        if (carBtns) carBtns.style.display = 'none';
+        if (embedBtns) embedBtns.style.display = 'flex';
+        document.getElementById('win-title').innerText = "Level 1 Complete!";
+        document.getElementById('win-cypher').style.display = 'none';
+    } else if (isCarousel) {
+        if (regBtns) regBtns.style.display = 'none';
+        if (embedBtns) embedBtns.style.display = 'none';
         if (carBtns) carBtns.style.display = 'flex';
         
         let playedGames = urlParams.get('played') ? urlParams.get('played').split(',').filter(Boolean) : [];
@@ -430,6 +439,7 @@ function scoreMe() {
             }).catch(console.warn);
     } else {
         if (carBtns) carBtns.style.display = 'none';
+        if (embedBtns) embedBtns.style.display = 'none';
         if (regBtns) regBtns.style.display = 'flex';
     }
 
@@ -517,6 +527,11 @@ document.getElementById('carousel-binge')?.addEventListener('click', () => {
     let playedGames = urlParams.get('played') ? urlParams.get('played').split(',').filter(Boolean) : [];
     if (!playedGames.includes('LW')) playedGames.push('LW');
     window.location.href = 'https://oops-games-hub.web.app/presale.html?carousel=true&played=' + playedGames.join(',') + '&returnUrl=' + encodeURIComponent(window.location.href);
+});
+
+document.getElementById('btn-embed-hook')?.addEventListener('click', () => {
+    if (analytics) logEvent(analytics, 'embed_hook_clicked');
+    window.open('https://oops-games-hub.web.app/', '_blank');
 });
 
 const advanceCarousel = async (isAnotherRide = false) => {
