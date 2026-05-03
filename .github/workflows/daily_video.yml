@@ -18,8 +18,8 @@ jobs:
           node-version: 'latest'
       - name: Randomize Video Format
         run: |
-          FORMATS=("standard" "fail" "interactive" "glitch" "bad_donkey_silent" "bad_donkey_tts")
-          SELECTED_FORMAT=${FORMATS[$(( $RANDOM % 6 ))]}
+          FORMATS=("standard" "fail" "interactive" "glitch" "bad_donkey_silent" "bad_donkey_tts" "split")
+          SELECTED_FORMAT=${FORMATS[$(( $RANDOM % 7 ))]}
           echo "Selected Format: $SELECTED_FORMAT"
           echo "FORMAT=$SELECTED_FORMAT" >> $GITHUB_ENV
 

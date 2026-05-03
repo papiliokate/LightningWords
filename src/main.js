@@ -4,6 +4,44 @@ import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/10.9.
 
 const urlParams = new URLSearchParams(window.location.search);
 
+if (urlParams.get('autoplay') === 'split') {
+    const asmrFile = urlParams.get('asmr');
+    if (asmrFile) {
+        const vid = document.createElement('video');
+        vid.src = `/asmr/${asmrFile}`;
+        vid.autoplay = true;
+        vid.loop = true;
+        vid.muted = true;
+        vid.style.position = 'absolute';
+        vid.style.bottom = '0';
+        vid.style.left = '0';
+        vid.style.width = '100%';
+        vid.style.height = '50%';
+        vid.style.objectFit = 'cover';
+        document.body.appendChild(vid);
+    }
+    
+    const banner = document.createElement('div');
+    banner.innerText = "Lightning Words from Oops-games";
+    banner.style.position = 'absolute';
+    banner.style.top = '50%';
+    banner.style.left = '50%';
+    banner.style.transform = 'translate(-50%, -50%)';
+    banner.style.background = 'rgba(0, 0, 0, 0.85)';
+    banner.style.color = '#fde047';
+    banner.style.padding = '12px 24px';
+    banner.style.borderRadius = '12px';
+    banner.style.border = '2px solid #b45309';
+    banner.style.fontFamily = 'system-ui, -apple-system, sans-serif';
+    banner.style.fontWeight = '800';
+    banner.style.fontSize = '28px';
+    banner.style.zIndex = '1000';
+    banner.style.whiteSpace = 'nowrap';
+    banner.style.boxShadow = '0 4px 15px rgba(0,0,0,0.5)';
+    banner.style.textShadow = '1px 1px 2px rgba(0,0,0,0.8)';
+    document.body.appendChild(banner);
+}
+
 let analytics;
 if (import.meta.env && import.meta.env.VITE_FIREBASE_API_KEY) {
   try {
@@ -119,8 +157,12 @@ function resizeGame() {
   const container = document.getElementById('game-container');
   if (!container) return;
   
+  let effectiveHeight = window.innerHeight;
+  if (urlParams.get('autoplay') === 'split') {
+      effectiveHeight = window.innerHeight / 2;
+  }
   const scaleWidth = window.innerWidth / LOGICAL_WIDTH;
-  const scaleHeight = window.innerHeight / LOGICAL_HEIGHT;
+  const scaleHeight = effectiveHeight / LOGICAL_HEIGHT;
   scale = Math.min(scaleWidth, scaleHeight);
 
   container.style.width = `${LOGICAL_WIDTH}px`;
@@ -129,7 +171,11 @@ function resizeGame() {
   container.style.transform = `scale(${scale})`;
   
   container.style.left = '50%';
-  container.style.top = '50%';
+  if (urlParams.get('autoplay') === 'split') {
+      container.style.top = '25%';
+  } else {
+      container.style.top = '50%';
+  }
   container.style.marginLeft = `-${LOGICAL_WIDTH / 2}px`;
   container.style.marginTop = `-${LOGICAL_HEIGHT / 2}px`;
 }
@@ -454,9 +500,12 @@ function scoreMe() {
 }
 
 async function runAutoplay() {
-    await new Promise(r => setTimeout(r, 1000));
+    const isSplit = urlParams.get('autoplay') === 'split';
+    const speedMultiplier = isSplit ? 3 : 1;
+    
+    await new Promise(r => setTimeout(r, 1000 / speedMultiplier));
     callLightning();
-    await new Promise(r => setTimeout(r, 1500));
+    await new Promise(r => setTimeout(r, 1500 / speedMultiplier));
     
     // Pick first 3 tiles
     for (let i = 0; i < 3; i++) {
@@ -464,10 +513,10 @@ async function runAutoplay() {
         t.dataset.inTray = "true";
         trayTiles.push(t);
         updateTrayLayout();
-        await new Promise(r => setTimeout(r, 500));
+        await new Promise(r => setTimeout(r, 500 / speedMultiplier));
     }
     
-    await new Promise(r => setTimeout(r, 500));
+    await new Promise(r => setTimeout(r, 500 / speedMultiplier));
     revealWord();
     
     // revealWord takes 1000ms. Force win screen soon after for video hook.
@@ -476,7 +525,7 @@ async function runAutoplay() {
             score += 20;
             scoreMe();
         }
-    }, 2000);
+    }, isSplit ? 1000 : 2000);
 }
 
 // --- Ecosystem Event Listeners ---
