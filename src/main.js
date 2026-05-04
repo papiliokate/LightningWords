@@ -62,6 +62,17 @@ if (import.meta.env && import.meta.env.VITE_FIREBASE_API_KEY) {
   }
 }
 
+let publisherDomain = 'unknown';
+if (document.referrer) {
+    try {
+        publisherDomain = new URL(document.referrer).hostname;
+    } catch(e) {}
+}
+
+if (urlParams.get('mode') === 'embed' && typeof analytics !== 'undefined') {
+    logEvent(analytics, 'embed_visit', { publisher_domain: publisherDomain });
+}
+
 // Meta-Cipher System (IDL Timezone)
 function getSeed(str) {
     let hash = 0;
@@ -450,7 +461,11 @@ function scoreMe() {
     document.getElementById('win-score').innerText = `Final Score: ${score}`;
     document.getElementById('win-cypher').textContent = getDailyCypher(0); // Assuming gameIndex 0 for Lightning Words
     
-    if (analytics) logEvent(analytics, 'level_complete', { score: score });
+    if (analytics) {
+        let eventParams = { score: score };
+        if (urlParams.get('mode') === 'embed') eventParams.publisher_domain = publisherDomain;
+        logEvent(analytics, 'level_complete', eventParams);
+    }
 
     const isEmbed = urlParams.get('mode') === 'embed';
     const isCarousel = urlParams.get('carousel') === 'true';
