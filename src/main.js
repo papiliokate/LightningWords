@@ -1,5 +1,6 @@
 import './style.css';
-import { initializeApp, getAnalytics, logEvent } from "./analytics_wrapper.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-analytics.js";
 
 const urlParams = new URLSearchParams(window.location.search);
 
@@ -55,7 +56,7 @@ if (import.meta.env && import.meta.env.VITE_FIREBASE_API_KEY) {
     };
     const app = initializeApp(firebaseConfig);
     analytics = getAnalytics(app);
-    logEvent(analytics, 'custom_session_start');
+    logEvent(analytics, 'session_start');
   } catch (e) {
     console.warn("Analytics error:", e);
   }
@@ -466,7 +467,7 @@ function scoreMe() {
         logEvent(analytics, 'level_complete', eventParams);
     }
 
-    const isEmbed = false;
+    const isEmbed = urlParams.get('mode') === 'embed';
     const isCarousel = urlParams.get('carousel') === 'true';
     const regBtns = document.getElementById('regular-win-btns');
     const carBtns = document.getElementById('carousel-btns');
@@ -489,7 +490,14 @@ function scoreMe() {
         const playNextBtn = document.getElementById('carousel-play-next');
         const shareBtn = document.getElementById('carousel-share');
         
-        
+        fetch('https://oops-games.com/carousel_config.json')
+            .then(res => res.json())
+            .then(configList => {
+                if (playedGames.length >= configList.length) {
+                    if (playNextBtn) playNextBtn.style.display = 'none';
+                    if (shareBtn) shareBtn.style.display = 'flex';
+                }
+            }).catch(console.warn);
     } else {
         if (carBtns) carBtns.style.display = 'none';
         if (embedBtns) embedBtns.style.display = 'none';
@@ -597,16 +605,8 @@ const advanceCarousel = async (isAnotherRide = false) => {
     if (isAnotherRide) currentPlayed = ['LW'];
     
     try {
-        const configList = [
-                { "id": "GR", "url": "/go-rabbit" },
-                { "id": "SS", "url": "/she-sells-sea-shells" },
-                { "id": "ST", "url": "/smack-that-donkey" },
-                { "id": "OG", "url": "/o-gox" },
-                { "id": "BB", "url": "/budbud" },
-                { "id": "LW", "url": "/lightning-words" },
-                { "id": "NIM", "url": "/nomisekili" },
-                { "id": "SDM", "url": "/sunny-day-maze" }
-            ];
+        const res = await fetch('https://oops-games.com/carousel_config.json');
+        const configList = await res.json();
         const unplayed = configList.filter(g => !currentPlayed.includes(g.id));
         if (unplayed.length > 0) {
             const nextGame = unplayed[Math.floor(Math.random() * unplayed.length)];
@@ -619,7 +619,7 @@ const advanceCarousel = async (isAnotherRide = false) => {
     }
 };
 
-
+document.getElementById("carousel-play-next")?.addEventListener("click", () => advanceCarousel(false));
 document.getElementById("carousel-share")?.addEventListener("click", async () => {
     const text = "I rode the carousel at oops-games.";
     if (navigator.share) {
