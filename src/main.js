@@ -62,16 +62,7 @@ if (import.meta.env && import.meta.env.VITE_FIREBASE_API_KEY) {
   }
 }
 
-let publisherDomain = 'unknown';
-if (document.referrer) {
-    try {
-        publisherDomain = new URL(document.referrer).hostname;
-    } catch(e) {}
-}
 
-if (urlParams.get('mode') === 'embed' && typeof analytics !== 'undefined') {
-    logEvent(analytics, 'embed_visit', { publisher_domain: publisherDomain });
-}
 
 // Meta-Cipher System (IDL Timezone)
 function getSeed(str) {
@@ -463,25 +454,16 @@ function scoreMe() {
     
     if (analytics) {
         let eventParams = { score: score };
-        if (urlParams.get('mode') === 'embed') eventParams.publisher_domain = publisherDomain;
+
         logEvent(analytics, 'level_complete', eventParams);
     }
 
-    const isEmbed = urlParams.get('mode') === 'embed';
     const isCarousel = urlParams.get('carousel') === 'true';
     const regBtns = document.getElementById('regular-win-btns');
     const carBtns = document.getElementById('carousel-btns');
-    const embedBtns = document.getElementById('embed-btns');
     
-    if (isEmbed) {
+    if (isCarousel) {
         if (regBtns) regBtns.style.display = 'none';
-        if (carBtns) carBtns.style.display = 'none';
-        if (embedBtns) embedBtns.style.display = 'flex';
-        document.getElementById('win-title').innerText = "Level 1 Complete!";
-        document.getElementById('win-cypher').style.display = 'none';
-    } else if (isCarousel) {
-        if (regBtns) regBtns.style.display = 'none';
-        if (embedBtns) embedBtns.style.display = 'none';
         if (carBtns) carBtns.style.display = 'flex';
         
         let playedGames = urlParams.get('played') ? urlParams.get('played').split(',').filter(Boolean) : [];
@@ -500,7 +482,6 @@ function scoreMe() {
             }).catch(console.warn);
     } else {
         if (carBtns) carBtns.style.display = 'none';
-        if (embedBtns) embedBtns.style.display = 'none';
         if (regBtns) regBtns.style.display = 'flex';
     }
 
@@ -593,10 +574,7 @@ document.getElementById('carousel-binge')?.addEventListener('click', () => {
     window.location.href = 'https://oops-games.com/presale.html?carousel=true&played=' + playedGames.join(',') + '&returnUrl=' + encodeURIComponent(window.location.href);
 });
 
-document.getElementById('btn-embed-hook')?.addEventListener('click', () => {
-    if (analytics) logEvent(analytics, 'embed_hook_clicked');
-    window.open('https://oops-games.com/', '_blank');
-});
+
 
 const advanceCarousel = async (isAnotherRide = false) => {
     const playedGamesStr = urlParams.get('played') || '';
