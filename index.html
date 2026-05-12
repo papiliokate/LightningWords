@@ -4,6 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Lightning Words - Matching Puzzle & Word Game | Oops-Games</title>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('mode') === 'captcha' || params.get('mode') === 'embed' || params.get('client_id')) {
+        window.location.replace('./conversion.html' + window.location.search);
+    }
+  </script>
+
     <meta name="description" content="Type fast and beat the clock in Lightning Words! A high-speed word puzzle game. Play instantly for free on Oops-Games." />
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
   </head>
@@ -16,6 +23,8 @@
 
       <div id="header">
         <div id="score">Score: 0</div>
+        
+        <button id="header-carousel-next" class="btn-header" style="pointer-events: auto !important; display: none; background: linear-gradient(135deg, #00f0ff, #0055ff); color: white; border: none; cursor: pointer; font-weight: bold; padding: 5px 10px; border-radius: 12px; margin-left: 10px;">➡️ Next Game</button>
         <div id="tutorial-btn" class="tutorial-btn">❓</div>
         <div id="lightning-count">Bolts: 5</div>
       </div>
@@ -57,10 +66,7 @@
           <button class="modal-btn btn-share" id="carousel-share" style="display:none; background: #38bdf8; color: white;">📤 Share for another ride</button>
           <button class="modal-btn btn-binge" id="carousel-binge" style="background: #e91e63; color: white;">🎟️ Binge this game ($0.99)</button>
         </div>
-        <div class="modal-btns" id="embed-btns" style="display:none;">
-          <p id="embed-hook-text" style="font-size: 1.2rem; margin-bottom: 15px; color: #333; font-weight: 600;">You survived Level 1! Only 4% of players beat Level 2.</p>
-          <button class="modal-btn btn-binge" id="btn-embed-hook" style="background: #e91e63; color: white; width: 100%; font-size: 1.3rem; padding: 15px;">🚀 Play Full Game on Oops-Games</button>
-        </div>
+        
         <p id="win-cypher" style="font-size: 1.5rem; font-family: monospace; letter-spacing: 4px; color: #333; margin: 15px auto; font-weight: bold; background: #eee; padding: 10px; border-radius: 10px; border: 2px dashed #ccc; width: fit-content;"></p>
       </div>
     </div>
@@ -99,5 +105,6 @@
 
     <script type="module" src="/src/main.js"></script>
     <script src="/streak_manager.js"></script>
+  <script src="/carousel_manager.js"></script>
 </body>
 </html>
