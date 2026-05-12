@@ -458,7 +458,7 @@ function scoreMe() {
         logEvent(analytics, 'level_complete', eventParams);
     }
 
-    const isCarousel = urlParams.get('carousel') === 'true';
+    const isCarousel = false;
     const regBtns = document.getElementById('regular-win-btns');
     const carBtns = document.getElementById('carousel-btns');
     
