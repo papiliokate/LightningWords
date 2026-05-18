@@ -1,19 +1,19 @@
 {
-    "name": "lightningwords",
-    "version": "0.0.0",
-    "private": true,
-    "type": "module",
-    "scripts": {
-        "dev": "vite",
-        "build": "vite build",
-        "preview": "vite preview",
-        "deploy": "node ../StudioHub/deploy_ecosystem.js"
-    },
-    "devDependencies": {
-        "vite": "^8.0.9"
-    },
-    "dependencies": {
-        "canvas-confetti": "^1.9.4",
-        "firebase": "^12.12.0"
-    }
+    "name":  "lightningwords",
+    "version":  "0.0.0",
+    "private":  true,
+    "type":  "module",
+    "scripts":  {
+                    "dev":  "vite",
+                    "build":  "vite build",
+                    "preview":  "vite preview",
+                    "deploy":  "node ../StudioHub/deploy_ecosystem.js"
+                },
+    "devDependencies":  {
+                            "vite":  "^5.2.0"
+                        },
+    "dependencies":  {
+                         "canvas-confetti":  "^1.9.4",
+                         "firebase":  "^12.12.0"
+                     }
 }
